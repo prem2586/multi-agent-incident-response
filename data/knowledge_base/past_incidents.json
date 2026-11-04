@@ -1,0 +1,100 @@
+
+[
+  {
+    "incident_id": "HIST-001",
+    "title": "Checkout Database Connection Pool Exhaustion",
+    "service": "checkout-service",
+    "incident_type": "service_degradation",
+    "severity": "high",
+    "symptoms": [
+      "High checkout API latency",
+      "HTTP 503 errors",
+      "Database connection pool exhausted",
+      "Connection acquisition timeouts"
+    ],
+    "root_cause": "Database connections were not released correctly after a deployment, exhausting the connection pool.",
+    "resolution": "Rolled back the deployment and verified database connection pool recovery.",
+    "runbook_id": "RB-001",
+    "keywords": [
+      "checkout",
+      "database",
+      "connection",
+      "pool",
+      "exhaustion",
+      "latency",
+      "503",
+      "deployment"
+    ]
+  },
+  {
+    "incident_id": "HIST-002",
+    "title": "Checkout Service CPU Saturation",
+    "service": "checkout-service",
+    "incident_type": "service_degradation",
+    "severity": "high",
+    "symptoms": [
+      "High CPU utilization",
+      "Slow checkout requests",
+      "Increased API latency",
+      "Thread pool saturation"
+    ],
+    "root_cause": "An inefficient request-processing loop caused excessive CPU consumption.",
+    "resolution": "Rolled back the application change and optimized request processing.",
+    "runbook_id": "RB-002",
+    "keywords": [
+      "checkout",
+      "cpu",
+      "latency",
+      "thread",
+      "performance"
+    ]
+  },
+  {
+    "incident_id": "HIST-003",
+    "title": "Authentication Brute Force Alert",
+    "service": "auth-service",
+    "incident_type": "security_alert",
+    "severity": "critical",
+    "symptoms": [
+      "High authentication failure rate",
+      "Repeated login attempts",
+      "Suspicious source IP activity",
+      "Elevated HTTP 401 responses"
+    ],
+    "root_cause": "Automated credential-guessing attempts from an external source.",
+    "resolution": "Applied rate limiting and temporarily blocked suspicious sources after security review.",
+    "runbook_id": "RB-003",
+    "keywords": [
+      "authentication",
+      "security",
+      "login",
+      "401",
+      "brute",
+      "force",
+      "rate",
+      "limiting"
+    ]
+  },
+  {
+    "incident_id": "HIST-004",
+    "title": "Payment Gateway Timeout",
+    "service": "payment-service",
+    "incident_type": "service_degradation",
+    "severity": "medium",
+    "symptoms": [
+      "Payment gateway timeout",
+      "Slow payment processing",
+      "Upstream dependency latency"
+    ],
+    "root_cause": "An external payment provider experienced elevated latency.",
+    "resolution": "Enabled a controlled fallback and monitored provider recovery.",
+    "runbook_id": "RB-004",
+    "keywords": [
+      "payment",
+      "gateway",
+      "timeout",
+      "provider",
+      "latency"
+    ]
+  }
+]

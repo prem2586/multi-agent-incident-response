@@ -1,0 +1,99 @@
+
+{
+  "incident_id": "INC-001",
+  "title": "Checkout Service Performance Degradation",
+  "description": "Checkout API latency and HTTP 5xx errors increased after a recent deployment.",
+  "incident_type": "service_degradation",
+  "severity": "high",
+  "status": "detected",
+  "affected_services": [
+    "checkout-service",
+    "payment-service"
+  ],
+  "detected_at": "2026-10-31T14:00:00Z",
+  "metrics": [
+    {
+      "name": "api_latency_p95",
+      "value": 3500,
+      "unit": "ms",
+      "timestamp": "2026-10-31T14:05:00Z"
+    },
+    {
+      "name": "api_latency_baseline_p95",
+      "value": 200,
+      "unit": "ms",
+      "timestamp": "2026-10-31T13:45:00Z"
+    },
+    {
+      "name": "http_5xx_error_rate",
+      "value": 18.5,
+      "unit": "percent",
+      "timestamp": "2026-10-31T14:05:00Z"
+    },
+    {
+      "name": "db_connection_pool_utilization",
+      "value": 98,
+      "unit": "percent",
+      "timestamp": "2026-10-31T14:05:00Z"
+    },
+    {
+      "name": "cpu_utilization",
+      "value": 42,
+      "unit": "percent",
+      "timestamp": "2026-10-31T14:05:00Z"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2026-10-31T14:01:00Z",
+      "level": "INFO",
+      "service": "checkout-service",
+      "message": "Deployment version 2.4.1 completed successfully",
+      "metadata": {
+        "deployment_id": "DEP-1042",
+        "version": "2.4.1"
+      }
+    },
+    {
+      "timestamp": "2026-10-31T14:03:00Z",
+      "level": "ERROR",
+      "service": "checkout-service",
+      "message": "Database connection pool exhausted",
+      "metadata": {
+        "active_connections": 98,
+        "max_connections": 100
+      }
+    },
+    {
+      "timestamp": "2026-10-31T14:04:00Z",
+      "level": "ERROR",
+      "service": "checkout-service",
+      "message": "HTTP 503 Service Unavailable",
+      "metadata": {
+        "endpoint": "/api/checkout",
+        "response_time_ms": 4200
+      }
+    },
+    {
+      "timestamp": "2026-10-31T14:05:00Z",
+      "level": "WARN",
+      "service": "payment-service",
+      "message": "Payment processing delayed due to upstream checkout timeout",
+      "metadata": {
+        "upstream_service": "checkout-service"
+      }
+    }
+  ],
+  "metadata": {
+    "environment": "production-simulated",
+    "region": "us-west-2",
+    "deployment_version": "2.4.1",
+    "previous_version": "2.4.0",
+    "deployment_time": "2026-10-31T14:01:00Z",
+    "suspected_cause": "database_connection_pool_exhaustion",
+    "customer_impact": "Checkout requests failing or timing out"
+  },
+  "root_cause": null,
+  "resolution": null,
+  "updated_at": "2026-10-31T14:05:00Z"
+}

@@ -1,0 +1,86 @@
+data/checkpoints/
+Last login: Wed Nov  4 07:12:19 on ttys001
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+(base) MacBook-Pro:multi-agent-incident-response Prem$ ls
+ARCHITECTURE.md		dashboard		docs			n8n			requirements.txt	tests
+backend			data			evaluation		README.md		test_gemini.py
+(base) MacBook-Pro:multi-agent-incident-response Prem$ cd ..
+(base) MacBook-Pro:capstone Prem$ ls
+multi-agent-incident-response
+(base) MacBook-Pro:capstone Prem$ cd ..
+(base) MacBook-Pro:ucla-agentic-ai Prem$ ls
+a2a		capstone	week1		week2		week3		week4		week5
+(base) MacBook-Pro:ucla-agentic-ai Prem$ cd week5
+(base) MacBook-Pro:week5 Prem$ ls
+backend		checkpoints.db	docs		frontend	README.md	server.pyconda	tests
+(base) MacBook-Pro:week5 Prem$ vi .gitignore 
+# Environment
+.env
+.env.local
+
+# Database
+*.db
+data/checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# Node
+node_modules/
+.next/
+out/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+~                                                                                                                                                                                                                    
+".gitignore" 38L, 280B
+

@@ -1,0 +1,74 @@
+
+{
+  "incident_id": "INC-002",
+  "title": "Suspicious Authentication Activity",
+  "description": "Repeated failed login attempts followed by an unusual successful authentication.",
+  "incident_type": "security_alert",
+  "severity": "high",
+  "status": "detected",
+  "affected_services": [
+    "authentication-service",
+    "identity-service"
+  ],
+  "detected_at": "2026-11-01T10:00:00Z",
+  "metrics": [
+    {
+      "name": "failed_login_attempts",
+      "value": 125,
+      "unit": "count",
+      "timestamp": "2026-11-01T10:05:00Z"
+    },
+    {
+      "name": "failed_login_baseline",
+      "value": 5,
+      "unit": "count",
+      "timestamp": "2026-11-01T09:45:00Z"
+    },
+    {
+      "name": "suspicious_login_count",
+      "value": 1,
+      "unit": "count",
+      "timestamp": "2026-11-01T10:05:00Z"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2026-11-01T10:01:00Z",
+      "level": "WARN",
+      "service": "authentication-service",
+      "message": "Repeated failed authentication attempts detected",
+      "metadata": {
+        "failed_attempts": 125,
+        "source_ip": "192.0.2.10"
+      }
+    },
+    {
+      "timestamp": "2026-11-01T10:03:00Z",
+      "level": "ERROR",
+      "service": "authentication-service",
+      "message": "Suspicious successful login after repeated failures",
+      "metadata": {
+        "source_ip": "192.0.2.10",
+        "anomalous_login": true
+      }
+    },
+    {
+      "timestamp": "2026-11-01T10:04:00Z",
+      "level": "WARN",
+      "service": "identity-service",
+      "message": "Potential account compromise detected",
+      "metadata": {
+        "risk_level": "high"
+      }
+    }
+  ],
+  "metadata": {
+    "environment": "production-simulated",
+    "region": "us-west-2",
+    "suspected_cause": "credential_compromise",
+    "customer_impact": "Potential unauthorized account access"
+  },
+  "root_cause": null,
+  "resolution": null,
+  "updated_at": "2026-11-01T10:05:00Z"
+}

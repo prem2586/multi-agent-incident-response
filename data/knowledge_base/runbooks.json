@@ -1,0 +1,106 @@
+[
+  {
+    "runbook_id": "RB-001",
+    "title": "Database Connection Pool Exhaustion Recovery",
+    "service": "checkout-service",
+    "symptoms": [
+      "Database connection pool exhausted",
+      "High API latency",
+      "HTTP 503 errors"
+    ],
+    "diagnostic_steps": [
+      "Check active and idle database connections.",
+      "Compare connection pool utilization before and after deployment.",
+      "Inspect connection acquisition timeout logs.",
+      "Review recent application changes affecting database connections."
+    ],
+    "remediation_options": [
+      {
+        "action": "rollback_deployment",
+        "description": "Rollback the recent application deployment.",
+        "risk": "medium",
+        "requires_approval": true,
+        "rollback_plan": "Restore the previously deployed version if the recovery action introduces additional issues."
+      },
+      {
+        "action": "restart_service",
+        "description": "Perform a controlled restart of the affected service.",
+        "risk": "medium",
+        "requires_approval": true,
+        "rollback_plan": "Restore the previous service configuration and investigate failed startup."
+      }
+    ]
+  },
+  {
+    "runbook_id": "RB-002",
+    "title": "CPU Saturation Investigation",
+    "service": "checkout-service",
+    "symptoms": [
+      "High CPU utilization",
+      "Slow requests",
+      "Thread pool saturation"
+    ],
+    "diagnostic_steps": [
+      "Inspect CPU utilization and process metrics.",
+      "Review application profiling data.",
+      "Correlate CPU spikes with recent deployments."
+    ],
+    "remediation_options": [
+      {
+        "action": "rollback_deployment",
+        "description": "Rollback the suspected application change.",
+        "risk": "medium",
+        "requires_approval": true,
+        "rollback_plan": "Redeploy the prior stable configuration."
+      }
+    ]
+  },
+  {
+    "runbook_id": "RB-003",
+    "title": "Authentication Attack Response",
+    "service": "auth-service",
+    "symptoms": [
+      "Repeated login failures",
+      "Suspicious IP activity",
+      "High HTTP 401 rate"
+    ],
+    "diagnostic_steps": [
+      "Review authentication failures by source.",
+      "Verify whether the traffic matches known attack patterns.",
+      "Assess affected accounts and customer impact."
+    ],
+    "remediation_options": [
+      {
+        "action": "enable_rate_limiting",
+        "description": "Enable a controlled rate-limiting policy in the simulated environment.",
+        "risk": "medium",
+        "requires_approval": true,
+        "rollback_plan": "Restore the previous rate-limiting policy."
+      }
+    ]
+  },
+  {
+    "runbook_id": "RB-004",
+    "title": "Payment Gateway Timeout Recovery",
+    "service": "payment-service",
+    "symptoms": [
+      "Payment gateway timeout",
+      "Slow payment processing",
+      "Provider latency"
+    ],
+    "diagnostic_steps": [
+      "Check payment provider response times.",
+      "Inspect timeout and retry metrics.",
+      "Verify fallback provider availability."
+    ],
+    "remediation_options": [
+      {
+        "action": "enable_payment_fallback",
+        "description": "Enable the simulated fallback payment route.",
+        "risk": "high",
+        "requires_approval": true,
+        "rollback_plan": "Restore the original payment routing configuration."
+      }
+    ]
+  }
+]

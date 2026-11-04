@@ -1,0 +1,111 @@
+{
+  "name": "Capstone - Incident Alert Intake (n8n Cloud)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "capstone-incident-alert",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "incident-webhook",
+      "name": "Incident Alert Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "capstone-incident-alert"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || {};\nconst allowed = ['INC-001', 'INC-002', 'INC-003'];\nif (!allowed.includes(body.incident_id)) { throw new Error('Unsupported incident_id'); }\nreturn [{ json: { incident_id: body.incident_id } }];"
+      },
+      "id": "validate-alert",
+      "name": "Validate Incident Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://REPLACE-WITH-YOUR-TUNNEL.trycloudflare.com/incidents",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ incident_id: $json.incident_id }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "start-investigation",
+      "name": "Start Incident Investigation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ incident_id: $json.incident_id, thread_id: $json.thread_id, status: $json.status }) }}",
+        "options": {}
+      },
+      "id": "webhook-response",
+      "name": "Return Incident Result",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Incident Alert Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate Incident Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Incident Alert": {
+      "main": [
+        [
+          {
+            "node": "Start Incident Investigation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start Incident Investigation": {
+      "main": [
+        [
+          {
+            "node": "Return Incident Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}
