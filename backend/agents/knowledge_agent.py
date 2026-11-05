@@ -37,7 +37,7 @@ def run_knowledge_agent(
             "Request incident ID does not match incident data"
         )
     # TEMPORARY: Simulate Knowledge Agent failure
-    """     return AgentResponse(
+    """return AgentResponse(
         request_message_id=request.message_id,
         incident_id=incident.incident_id,
         correlation_id=request.correlation_id,
