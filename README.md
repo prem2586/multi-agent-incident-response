@@ -392,6 +392,4 @@ This is **adaptive rule-based action planning** with optional LLM-assisted reaso
 - A production implementation would need stronger identity and authorization controls, audit retention, secrets management, idempotency, approval policies, and real post-action verification.
 - Potential enhancements include richer evidence scoring, dependency-aware replanning, additional fault-injection tests, semantic retrieval, stronger post-mortem quality checks, and distributed checkpoint storage.
 
-## Capstone deliverables
 
-This repository provides the **working system** portion of the UCLA Agentic AI capstone. The submission also requires a **2–4-page architecture document**, an integrated **1–2-page technical analysis**, and a **single presentation/live-demo recording of at most 10 minutes**.
